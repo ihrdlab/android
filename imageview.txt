@@ -1,0 +1,14 @@
+package com.example.imgview; import
+android.os.Bundle; import android.app.Activity; import
+android.view.View; import android.widget.ImageView;
+public class MainActivity extendsActivity
+{
+ImageView imgView; @Override protected void
+onCreate(BundlesavedInstanceState)
+{super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main); }
+public void changeImg(Viewv)
+{
+imgView = (ImageView)
+findViewById(R.id.imageView1);
+imgView.setImageResource(R.drawabl e.img); }}

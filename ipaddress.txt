@@ -1,0 +1,43 @@
+package com.example.ipadrs; import
+java.net.InetAddress; import java.net.NetworkInterface;
+import java.util.Collections; import java.util.List; import
+android.app.Activity; import
+android.net.wifi.WifiManager; import android.os.Bundle;
+import android.text.format.Formatter; import
+android.view.Menu; import android.widget.TextView;
+public class MainActivity extends Activity {
+TextView tv; protected void onCreate(Bundle
+savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main); tv = (TextView)
+findViewById(R.id.textView1); WifiManager wm =
+(WifiManager)
+getSystemService(WIFI_SERVICE);Strin
+g ipAddress = getIPAddress(); tv.setText("Your Device IP
+Address: " +
+ipAddress); }
+public static String getIPAddress() {
+try {
+String ip6=""; List<NetworkInterface> interfaces =
+Collections.list(NetworkInterface.getNe
+tworkInterfaces()); for (NetworkInterface intf :
+interfaces)
+{
+List<InetAddress> addrs =
+Collections.list(intf.getInetAddresses()); for (InetAddress
+addr : addrs) {
+if (!addr.isLoopbackAddress()) {
+String sAddr = addr.getHostAddress(); boolean isIPv4 =
+sAddr.indexOf(':')<0; if (isIPv4) return sAddr; else {
+int delim = sAddr.indexOf('%'); ip6= delim<0 ?
+sAddr.toUpperCase() : sAddr.substring(0,
+delim).toUpperCase(); }
+}
+}
+}return ip6; } catch (Exception ignored)
+{ } return ""; }
+@Override public boolean
+onCreateOptionsMenu(Menu menu) {
+getMenuInflater().inflate(R.menu.main, menu); return
+true; }
+}
